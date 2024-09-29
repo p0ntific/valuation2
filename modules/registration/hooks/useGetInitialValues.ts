@@ -1,6 +1,6 @@
 import { defaultValues } from "../constants";
-import { ILogin } from "../types";
+import { IRegistration } from "../types";
 
 export const useGetInitialValues = () => {
-    return defaultValues as ILogin;
+    return defaultValues as IRegistration;
 };

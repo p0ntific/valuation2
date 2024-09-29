@@ -1,5 +1,4 @@
 "use client";
-import { AnyObject } from "@/types";
 import React, { useContext } from "react";
 import {
     IFiltersContextValue,

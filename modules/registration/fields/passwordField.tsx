@@ -1,14 +1,14 @@
 import { useField } from "@/lib/filters/hooks/useField";
 import { Input } from "@/ui-kit/Input";
-import { ILogin } from "../types";
+import { IRegistration } from "../types";
 
 export const PasswordField = () => {
-    const { onChange, value, isError, isActive } = useField<ILogin, "password">(
-        "password",
-        {
-            checkIsError: (value) => value.length < 4,
-        },
-    );
+    const { onChange, value, isError, isActive } = useField<
+        IRegistration,
+        "password"
+    >("password", {
+        checkIsError: (value) => value.length < 4,
+    });
 
     if (!isActive) {
         return null;

@@ -1,7 +1,6 @@
 "use client";
 import { FiltersProvider } from "@/lib/filters/context";
 import { AboutPanel } from "@/modules/aboutPanel";
-import { Footer } from "@/modules/footer";
 import { useFormFilters } from "@/modules/form/hooks/useFormFilters";
 import { LangController } from "@/modules/langController";
 import { Navbar } from "@/modules/navbar";
