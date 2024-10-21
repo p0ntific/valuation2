@@ -1,36 +1,50 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { Chip } from "../Chip";
 import { Text } from "../Text";
+import classNames from "classnames";
 
-interface IRadioGroup<V extends string | undefined> {
+interface IRadioGroup<V extends string> {
     title?: string;
     options: { content: string; value: V }[];
     value?: V;
-    onChange?: (item: V) => void;
+    onChange?: (item: V | undefined) => void;
     errorMessage?: string;
+    className?: string;
 }
 
-const RadioGroup = <V extends string | undefined>({
+const RadioGroup = <V extends string>({
     title,
     options,
     value,
     onChange,
+    className,
     errorMessage,
 }: IRadioGroup<V>) => {
+    const handleChange = useCallback(
+        (optionValue: V) => {
+            if (optionValue === value) {
+                onChange?.(undefined);
+            } else {
+                onChange?.(optionValue);
+            }
+        },
+        [value, onChange],
+    );
+
     return (
-        <div className="flex flex-col gap-4">
+        <div className={classNames("flex flex-col gap-4", className)}>
             {title && (
                 <label>
-                    <Text variant="header-1">{title}</Text>
+                    <Text variant="subheader-2">{title}</Text>
                 </label>
             )}
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
                 {options.map((el) => {
                     return (
                         <Chip
                             key={el.value}
                             content={el.content}
-                            onClick={() => onChange?.(el.value)}
+                            onClick={() => handleChange(el.value)}
                             isActive={el.value === value}
                         />
                     );

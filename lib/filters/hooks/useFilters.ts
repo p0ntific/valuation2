@@ -37,6 +37,11 @@ export const useFilters = <V extends IFiltersValues, T extends IResponseBase>({
         initialValues,
     });
 
+    const touchedFieldsCount = useMemo(() => {
+        return Object.values(fieldsMeta).filter((meta) => meta.isTouched)
+            .length;
+    }, [fieldsMeta]);
+
     const handleFieldChange = useCallback(
         (name: keyof V, value: V[keyof V]) => {
             setFieldValue(name, value);
@@ -107,8 +112,10 @@ export const useFilters = <V extends IFiltersValues, T extends IResponseBase>({
             handleReset,
             handleSubmit,
             values,
+            touchedFieldsCount,
         };
     }, [
+        touchedFieldsCount,
         response,
         setResponse,
         defaultValues,

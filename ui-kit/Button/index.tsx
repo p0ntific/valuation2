@@ -1,10 +1,11 @@
 import { ButtonProps, Loader } from "@gravity-ui/uikit";
 import classNames from "classnames";
-import { MouseEvent, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 interface IButtonProps extends ButtonProps {
     isLoading?: boolean;
     isSquare?: boolean;
+    onClick: () => void;
     shouldConfirm?: boolean;
 }
 
@@ -43,16 +44,13 @@ export const Button = (props: IButtonProps) => {
         return children;
     }, [children, isLoading, isSecondClick]);
 
-    const handleClick = useCallback(
-        (event: MouseEvent<HTMLButtonElement>) => {
-            shouldConfirm && setIsSecondClick(true);
-            if (!shouldConfirm || isSecondClick) {
-                onClick?.(event);
-                setIsSecondClick(false);
-            }
-        },
-        [onClick, shouldConfirm, isSecondClick],
-    );
+    const handleClick = useCallback(() => {
+        if (shouldConfirm) setIsSecondClick(true);
+        if (!shouldConfirm || isSecondClick) {
+            onClick?.();
+            setIsSecondClick(false);
+        }
+    }, [onClick, shouldConfirm, isSecondClick]);
     return (
         <button
             {...restProps}

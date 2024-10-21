@@ -1,3 +1,14 @@
 .input input {
-    @apply text-xl h-12 mx-2 !important;
+    @apply text-[16px] m-0 p-0 !important;
+    -webkit-appearance: none !important;
+}
+
+.input input::-webkit-outer-spin-button,
+.input input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.input span {
+    @apply bg-none border-none outline-none !important;
 }

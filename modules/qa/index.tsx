@@ -28,14 +28,14 @@ export const QA = () => {
                     a: t(`answer_${el}` as keyof (typeof translations)["ru"]),
                 };
             }),
-        [defaultActiveState],
+        [t],
     );
 
     return (
-        <div className="flex flex-col mb-16">
+        <div className="flex flex-col mb-16 ">
             <Text
                 variant="display-2"
-                className="pb-16 mb-6 border-b border-gray-800"
+                className="pb-16 mb-6 border-b border-gray-800 "
             >
                 {t("title")}
             </Text>
@@ -47,10 +47,10 @@ export const QA = () => {
                     return (
                         <div
                             key={index + "qa"}
-                            className="flex gap-4 w-full flex-col pt-4 pb-6 mb-4  border-b border-gray-800"
+                            className="flex gap-4 group w-full flex-col pt-4 pb-6 mb-4 cursor-pointer border-b border-gray-800"
                         >
                             <div
-                                className="flex justify-between cursor-pointer"
+                                className="flex justify-between "
                                 onClick={() =>
                                     setActiveQuestion({
                                         ...defaultActiveState,
@@ -58,7 +58,12 @@ export const QA = () => {
                                     })
                                 }
                             >
-                                <Text variant="header-2">{el.q}</Text>
+                                <Text
+                                    variant="header-1"
+                                    className="text-gray-700 group-hover:text-blue-500"
+                                >
+                                    {el.q}
+                                </Text>
                                 <span className="p-2 rounded-full hover:bg-gray-100 transition">
                                     {isActive ? (
                                         <svg
@@ -95,7 +100,7 @@ export const QA = () => {
                             </div>
                             <p
                                 className={classNames(
-                                    "text-lg transform transition-all duration-300",
+                                    "text-lg transform transition-all duration-500",
                                     {
                                         " max-h-[400px]": isActive,
                                         "max-h-0 overflow-hidden": !isActive,

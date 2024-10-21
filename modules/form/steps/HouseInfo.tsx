@@ -9,16 +9,10 @@ import { HouseMaterialField } from "../fields/houseInfo/HouseMaterialField";
 import { NewFlatField } from "../fields/houseInfo/NewFlatField";
 import { ParkingTypeField } from "../fields/houseInfo/ParkingTypeField";
 import { translations } from "./i18n";
+import { useFormStepContext } from "@/lib/formStep/context";
 
-interface IHouseInfoProps {
-    handleNextStep: () => void;
-    handlePrevStep: () => void;
-}
-
-export const HouseInfo = ({
-    handleNextStep,
-    handlePrevStep,
-}: IHouseInfoProps) => {
+export const HouseInfo = () => {
+    const { handlePrevStep, handleNextStep } = useFormStepContext();
     const t = useTranslation(translations);
 
     const { isLoading, delayedFunction } = useFakeLoading(400, handleNextStep);

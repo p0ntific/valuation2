@@ -3,7 +3,7 @@ import { useField } from "@/lib/filters/hooks/useField";
 import { RadioGroup } from "@/ui-kit/RadioGroup";
 import { IFilters } from "../../types";
 
-const ROOMS_TOTAL_AVAILABLE_VALUES = ["0.7", "1", "2", "3", "4", "5+"] as const 
+const ROOMS_TOTAL_AVAILABLE_VALUES = ["0.7", "1", "2", "3", "4", "5+"] as const;
 
 export type IRoomsTotalField =
     | (typeof ROOMS_TOTAL_AVAILABLE_VALUES)[number]
@@ -15,10 +15,9 @@ const options = ROOMS_TOTAL_AVAILABLE_VALUES.map((el) => {
 });
 
 export const RoomsTotalField = () => {
-    const { onChange, value, isError, isActive } = useField<
-        IFilters,
-        "roomsTotal"
-    >("roomsTotal");
+    const { onChange, value, isActive } = useField<IFilters, "roomsTotal">(
+        "roomsTotal",
+    );
 
     if (!isActive) {
         return null;
@@ -26,6 +25,7 @@ export const RoomsTotalField = () => {
 
     return (
         <RadioGroup
+            className="w-full"
             options={options}
             onChange={onChange}
             value={value}

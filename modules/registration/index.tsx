@@ -23,13 +23,13 @@ export const Registration = () => {
     }>(registration);
     const handleSubmit = useCallback(() => {
         mutate(values);
-    }, [values]);
+    }, [mutate, values]);
 
     useEffect(() => {
         if (data && !isLoading) {
             navigate("/login");
         }
-    }, [data, isLoading, mutate]);
+    }, [data, isLoading, navigate]);
     return (
         <div className="w-full h-[100vh] flex items-center justify-center">
             <div className="flex flex-col gap-6 items-start">

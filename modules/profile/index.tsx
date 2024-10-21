@@ -5,7 +5,6 @@ import { useUrl } from "@/hooks/useUrl";
 import { useTranslation } from "@/lib/translation/useTranslation";
 import { Button } from "@/ui-kit/Button";
 import { Text } from "@/ui-kit/Text";
-import local from "next/font/local";
 import { useCallback, useEffect } from "react";
 import { getInfo } from "./api/getInfo";
 import { translations } from "./i18n";
@@ -19,12 +18,12 @@ export function Profile() {
         if (!token) {
             navigate("/login");
         }
-    }, [navigate]);
+    }, [navigate, token]);
 
     const handleClose = useCallback(() => {
         localStorage.removeItem("token");
         reloadPage();
-    }, []);
+    }, [reloadPage]);
 
     if (isLoading || !data) {
         return "загрузка...";

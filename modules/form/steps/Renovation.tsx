@@ -1,5 +1,4 @@
 "use client";
-import { useFakeLoading } from "@/hooks/useFakeLoading";
 import { useTranslation } from "@/lib/translation/useTranslation";
 import { Button } from "@/ui-kit/Button";
 import { Text } from "@/ui-kit/Text";
@@ -7,19 +6,17 @@ import { Text } from "@/ui-kit/Text";
 import { HasRenovationField } from "../fields/renovation/HasRenovationField";
 import { RenovationTypeField } from "../fields/renovation/RenovationType";
 import { translations } from "./i18n";
+import { useFormStepContext } from "@/lib/formStep/context";
 
 interface IRenovationProps {
     handleSubmit: () => void;
-    handlePrevStep: () => void;
     isLoading?: boolean;
 }
 
-export const Renovation = ({
-    isLoading,
-    handleSubmit,
-    handlePrevStep,
-}: IRenovationProps) => {
+export const Renovation = ({ isLoading, handleSubmit }: IRenovationProps) => {
     const t = useTranslation(translations);
+    const { handlePrevStep } = useFormStepContext();
+
     return (
         <div className="flex flex-col gap-10 mb-20">
             <div className="flex items-center gap-4">

@@ -41,6 +41,7 @@ export interface IFiltersContextValue<
 > {
     values: V;
     defaultValues: V;
+    touchedFieldsCount: number;
     fieldsMeta: IFiltersFieldsMeta<V>;
     handleFieldChange(name: keyof V, value: V[keyof V]): void;
     handleFieldChangeMeta(

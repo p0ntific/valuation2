@@ -14,7 +14,8 @@ export const FloorField = () => {
     return (
         <Input
             label="Этаж"
-            className="min-w-[150px] max-w-[150px]"
+            className="w-1/2"
+            placeholder="10"
             value={value}
             type="number"
             onChange={onChange}

@@ -1,4 +1,3 @@
-import { useUrl } from "@/hooks/useUrl";
 import { useFilters } from "@/lib/filters/hooks/useFilters";
 import { IFiltersSubmitParams } from "@/lib/filters/types";
 import { useCallback } from "react";
@@ -14,7 +13,6 @@ export const useRegistrationFilters = ({
     onSubmit,
 }: IUseRegistrationFiltersProps | undefined = {}) => {
     const initialValues = useGetInitialValues();
-    const { origin, navigate } = useUrl();
 
     const submit = useCallback(
         (submitParams: IFiltersSubmitParams<IRegistration>) => {
@@ -22,7 +20,7 @@ export const useRegistrationFilters = ({
 
             return onSubmit?.(values);
         },
-        [navigate, onSubmit, origin],
+        [onSubmit],
     );
 
     const filtersContextValue = useFilters({

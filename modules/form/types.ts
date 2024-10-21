@@ -20,3 +20,5 @@ export interface IFilters {
     renovationType: IRenovationTypeField;
     hasRenovation: IHasRenovationField;
 }
+
+export type IFiltersKeys = keyof IFilters;

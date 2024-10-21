@@ -15,12 +15,12 @@ const Chip = ({ content, isActive, onClick }: IChipProps) => {
             className={classNames(
                 "rounded-full flex items-center justify-center px-6 h-fit py-3 transition cursor-pointer",
                 {
-                    "border border-blue-300 bg-blue-300 text-white": isActive,
+                    "border bg-slate-600 border-slate-900 text-white": isActive,
                     "border border-gray-300  hover:bg-gray-100 ": !isActive,
                 },
             )}
         >
-            <Text variant="subheader-3">{content}</Text>
+            <Text variant="subheader-2">{content}</Text>
         </div>
     );
 };

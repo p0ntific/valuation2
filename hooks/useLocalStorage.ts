@@ -1,6 +1,7 @@
 import { IRegion } from "@/lib/region/context";
 import { useCallback } from "react";
 
+// TODO Переписать на хук, передавать туда параметры c дженериком)
 export const useLocalStorage = () => {
     const isLocalStorageExist = typeof window !== "undefined";
     const setToken = useCallback(

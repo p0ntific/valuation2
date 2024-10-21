@@ -14,8 +14,9 @@ export const AreaField = () => {
     return (
         <Input
             type="number"
-            className="min-w-[150px] max-w-[150px]"
-            label="Площадь"
+            className="w-1/2"
+            placeholder="35"
+            label="Площадь, м²"
             value={value}
             onChange={onChange}
             errorMessage={isError && "Проверьте площадь"}

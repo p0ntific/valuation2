@@ -18,7 +18,8 @@ export const AddressField = () => {
 
     return (
         <Input
-            className="min-w-[700px] max-w-[700px]"
+            className="w-full"
+            placeholder="Улица пушкина дом 2 к.3"
             label="Адрес"
             value={value}
             hint="Город указывать не нужно"

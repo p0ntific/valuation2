@@ -3,27 +3,25 @@ import { useMutation } from "@/hooks/useMutation";
 import { useUrl } from "@/hooks/useUrl";
 import { useFiltersContext } from "@/lib/filters/context";
 import { useRegionContext } from "@/lib/region/context";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { IGetPriceResponse } from "../result/types";
 import { getPrice, IGetPriceDto } from "./api/getPrice";
 import { Base } from "./steps/Base";
-import { Email } from "./steps/Email";
 import { HouseInfo } from "./steps/HouseInfo";
 import { Renovation } from "./steps/Renovation";
 import { IFilters } from "./types";
-
-const steps = ["base", "email", "houseInfo", "renovation"] as const;
-
-type IStep = (typeof steps)[number];
+import { useFormStepContext } from "@/lib/formStep/context";
+import { Header } from "./Header";
 
 export const Form = () => {
     const { navigate } = useUrl();
     const { values, setResponse } = useFiltersContext<IFilters>();
-    const [currentStep, setCurrentStep] = useState<IStep>("base");
+    const { step } = useFormStepContext();
     const { region } = useRegionContext();
     const { mutate, isLoading, data } = useMutation<{
         data: IGetPriceResponse;
     }>(getPrice);
+
     const handleSubmit = useCallback(() => {
         const body: Partial<IGetPriceDto> = {
             address: region + " " + values.address,
@@ -45,56 +43,49 @@ export const Form = () => {
         }
 
         mutate(body);
-    }, [values, region]);
+    }, [
+        region,
+        values.address,
+        values.houseMaterial,
+        values.area,
+        values.roomsTotal,
+        values.floor,
+        values.floors,
+        values.newFlat,
+        values.hasRenovation,
+        values.renovationType,
+        mutate,
+    ]);
 
     useEffect(() => {
         if (data && !isLoading) {
             setResponse(data.data);
             navigate("/result");
         }
-    }, [data, isLoading, mutate]);
-
-    const handleNextStep = () => {
-        if (currentStep === "base") {
-            setCurrentStep("email");
-        } else if (currentStep === "email") {
-            setCurrentStep("houseInfo");
-        } else if (currentStep === "houseInfo") {
-            setCurrentStep("renovation");
-        }
-    };
-
-    const handlePrevStep = () => {
-        if (currentStep === "email") {
-            setCurrentStep("base");
-        } else if (currentStep === "houseInfo") {
-            setCurrentStep("email");
-        } else if (currentStep === "renovation") {
-            setCurrentStep("houseInfo");
-        }
-    };
-
-    const stepProps = { handleNextStep, handlePrevStep };
+    }, [data, isLoading, mutate, navigate, setResponse]);
 
     const stepComponent = useMemo(() => {
-        switch (currentStep) {
-            case "base":
-                return <Base {...stepProps} />;
-            case "email":
-                return <Email {...stepProps} />;
-            case "houseInfo":
-                return <HouseInfo {...stepProps} />;
-            case "renovation":
+        switch (step) {
+            case "BASE":
+                return <Base />;
+            case "HOUSE_INFO":
+                return <HouseInfo />;
+            case "RENOVATION":
                 return (
                     <Renovation
                         isLoading={isLoading}
                         handleSubmit={handleSubmit}
-                        {...stepProps}
                     />
                 );
             default:
                 return null;
         }
-    }, [currentStep, stepProps]);
-    return <div className="mt-12">{stepComponent}</div>;
+    }, [handleSubmit, isLoading, step]);
+
+    return (
+        <div className="w-[1000px] mx-auto flex flex-col gap-16 mt-32">
+            <Header />
+            {stepComponent}
+        </div>
+    );
 };
