@@ -1,12 +1,14 @@
-import { ButtonProps, Loader } from "@gravity-ui/uikit";
+import { ButtonProps } from "@gravity-ui/uikit";
 import classNames from "classnames";
 import { useCallback, useMemo, useState } from "react";
+import { Loader } from "../Loader";
 
 interface IButtonProps extends ButtonProps {
     isLoading?: boolean;
     isSquare?: boolean;
     onClick: () => void;
     shouldConfirm?: boolean;
+    isDark?: boolean;
 }
 
 export const Button = (props: IButtonProps) => {
@@ -16,6 +18,7 @@ export const Button = (props: IButtonProps) => {
         onClick,
         view,
         shouldConfirm,
+        isDark,
         isLoading,
         children,
         ...restProps
@@ -28,7 +31,9 @@ export const Button = (props: IButtonProps) => {
             case "flat-action":
                 return "bg-blue-300 hover:bg-blue-200 text-white";
             case "flat-danger":
-                return "hover:bg-gray-100 text-red-500";
+                return "bg-white hover:bg-gray-100 text-black";
+            case "flat-info":
+                return "hover:bg-gray-800 text-white bg-black";
             default:
                 return "bg-gray-200 hover:bg-gray-300";
         }
@@ -36,13 +41,13 @@ export const Button = (props: IButtonProps) => {
 
     const content = useMemo(() => {
         if (isLoading) {
-            return <Loader />;
+            return <Loader isDark={isDark} />;
         }
         if (isSecondClick) {
             return "Вы уверены?";
         }
         return children;
-    }, [children, isLoading, isSecondClick]);
+    }, [children, isDark, isLoading, isSecondClick]);
 
     const handleClick = useCallback(() => {
         if (shouldConfirm) setIsSecondClick(true);
@@ -56,7 +61,7 @@ export const Button = (props: IButtonProps) => {
             {...restProps}
             onClick={handleClick}
             className={classNames(
-                "px-8 py-3  transition font-semibold text-xl",
+                "px-8 py-3 transition font-semibold text-[18px]",
                 {
                     "rounded-full": !isSquare,
                     "rounded-xl": isSquare,

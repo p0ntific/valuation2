@@ -1,8 +1,10 @@
 import { useField } from "@/lib/filters/hooks/useField";
 import { Input } from "@/ui-kit/Input";
-import { IFilters } from "../../types";
+import { useRegionContext } from "@/lib/region/context";
+import { IBaseFieldProps, IFilters } from "../../types";
 
-export const AddressField = () => {
+export const AddressField = ({ className }: IBaseFieldProps) => {
+    const { region } = useRegionContext();
     const { onChange, value, isError, isActive } = useField<
         IFilters,
         "address"
@@ -18,9 +20,10 @@ export const AddressField = () => {
 
     return (
         <Input
-            className="w-full"
+            className={className}
             placeholder="Улица пушкина дом 2 к.3"
-            label="Адрес"
+            label={"Адрес, г." + region}
+            hasClear
             value={value}
             hint="Город указывать не нужно"
             onChange={onChange}

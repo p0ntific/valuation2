@@ -2,7 +2,7 @@
 import { useFiltersContext } from "@/lib/filters/context";
 import { useTranslation } from "@/lib/translation/useTranslation";
 import { Text } from "@/ui-kit/Text";
-import { IFilters } from "../form/types";
+import { IFilters } from "../../shared/form/types";
 import { translations } from "./i18n";
 import { IGetPriceResponse } from "./types";
 

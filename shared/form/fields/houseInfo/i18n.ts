@@ -11,8 +11,7 @@ const ru = {
     houseMaterial_label_pnl: "Панельный",
     houseMaterial_label_wdn: "Деревянный",
     houseMaterial_label_brm: "Кирпично-монолитный",
-    newFlat_label_1: "Новостройка",
-    newFlat_label_2: "Вторичка",
+
 } as const;
 
 export const translations = {

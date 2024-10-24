@@ -9,7 +9,7 @@ import { getPrice, IGetPriceDto } from "./api/getPrice";
 import { Base } from "./steps/Base";
 import { HouseInfo } from "./steps/HouseInfo";
 import { Renovation } from "./steps/Renovation";
-import { IFilters } from "./types";
+import { IFilters } from "../../shared/form/types";
 import { useFormStepContext } from "@/lib/formStep/context";
 import { Header } from "./Header";
 
@@ -83,7 +83,7 @@ export const Form = () => {
     }, [handleSubmit, isLoading, step]);
 
     return (
-        <div className="w-[1000px] mx-auto flex flex-col gap-16 mt-32">
+        <div className="w-[1200px] mx-auto flex flex-col gap-16 my-24">
             <Header />
             {stepComponent}
         </div>

@@ -35,13 +35,13 @@ export const AboutPanel = ({ title }: { title: string }) => {
                 <div className="text-4xl font-bold">{title}</div>
 
                 <div className="p-4 bg-gray-100 rounded-md text-lg flex justify-between items-center w-[500px] px-6">
-                    <div>
-                        <p>
+                    <div className="flex flex-col gap-1">
+                        <Text variant="body-3">
                             <span>{t("line11")}</span> &mdash; {t("line12")}
-                        </p>
-                        <p>
+                        </Text>
+                        <Text variant="body-3">
                             <span>{t("line21")}</span> &mdash; {t("line22")}
-                        </p>
+                        </Text>
                     </div>
                     <div className="text-center mt-2 text-3xl">&#8595;</div>
                 </div>

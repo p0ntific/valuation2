@@ -1,20 +1,30 @@
 import { useFiltersContext } from "@/lib/filters/context";
 import { useFormStepContext } from "@/lib/formStep/context";
-import { IFilters } from "@/modules/form/types";
+import { IFilters, IFiltersKeys } from "@/shared/form/types";
 import { useCallback, useMemo, useState } from "react";
 
-const BASE_FIELDS = ["address", "area", "floor", "roomsTotal"] as const;
+const BASE_FIELDS: IFiltersKeys[] = [
+    "address",
+    "area",
+    "floor",
+    "roomsTotal",
+] as const;
 
-export const useBaseStep = () => {
+export const useNextStep = () => {
     const { fieldsMeta, values } = useFiltersContext<IFilters>();
     const [isNextButtonPressed, setIsNextButtonPressed] = useState(false);
-    const { handleNextStep } = useFormStepContext();
+    const { handleNextStep, step, stepNumber, countSteps } =
+        useFormStepContext();
 
     const canGoNextStep: boolean = useMemo(() => {
+        if (step !== "BASE") {
+            return true;
+        }
+
         return BASE_FIELDS.every((field) => {
             return fieldsMeta[field].isTouched && values[field];
         });
-    }, [fieldsMeta, values]);
+    }, [fieldsMeta, step, values]);
 
     const handleNextStepButton = useCallback(() => {
         setIsNextButtonPressed(true);
@@ -26,5 +36,7 @@ export const useBaseStep = () => {
         isNextButtonPressed,
         setIsNextButtonPressed,
         handleNextStepButton,
+        stepNumber,
+        countSteps,
     };
 };

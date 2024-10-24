@@ -22,7 +22,7 @@ const links: { text: string; href: string }[] = [
 
 export const Footer = () => {
     return (
-        <div className="w-full flex flex-col items-center py-32 gap-6 bg-gray-100 mt-auto">
+        <div className="w-full flex flex-col items-center py-32 gap-6  mt-auto">
             <div className="flex gap-4">
                 {links.map((el) => (
                     <Link

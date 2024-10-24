@@ -1,22 +1,38 @@
 import { Select as SelectComponent, SelectProps } from "@gravity-ui/uikit";
-import { LegacyRef, memo, useCallback } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { Text } from "../Text";
+import classNames from "classnames";
 
 type ISelectBase = string;
 
 interface ISelectProps<V extends ISelectBase>
     extends Omit<SelectProps, "value" | "options"> {
-    value: V;
+    value: V | undefined;
     onChange: (item: V) => void;
     options: { value: V; content: string }[];
 }
 
-const Select = <V extends ISelectBase>(props: ISelectProps<V>) => {
-    const { value: externalValue, options, onChange, ...restprops } = props;
+const OPTION_HEIGHT = 40;
 
-    const value = Array.isArray(externalValue)
-        ? externalValue
-        : [externalValue];
+const Select = <V extends ISelectBase>(props: ISelectProps<V>) => {
+    const {
+        value: externalValue,
+        options,
+        onChange,
+        label,
+        className,
+        placeholder,
+        ...restprops
+    } = props;
+
+    const value = useMemo(() => {
+        if (externalValue === undefined) {
+            return [];
+        } else
+            return Array.isArray(externalValue)
+                ? externalValue
+                : [externalValue];
+    }, [externalValue]);
 
     const onUpdate = useCallback(
         (value: string[]) => {
@@ -31,32 +47,72 @@ const Select = <V extends ISelectBase>(props: ISelectProps<V>) => {
                 acc += option.content;
             }
             return acc;
-        }, "") ?? "";
+        }, "") ?? null;
 
     return (
         <SelectComponent
-            renderOption={(option) => {
+            renderPopup={({
+                renderFilter,
+                renderList,
+            }: {
+                renderFilter: () => React.JSX.Element | null;
+                renderList: () => React.JSX.Element;
+            }) => {
                 return (
-                    <div className={`transition w-full rounded-m z-10 py-2`}>
-                        <Text variant="subheader-3">{option.content}</Text>
+                    <div className="bg-white py-0 rounded-xl border-0">
+                        {renderFilter()}
+                        {renderList()}
                     </div>
                 );
             }}
+            renderOption={(option) => {
+                return (
+                    <div>
+                        <Text variant="subheader-2">{option.content}</Text>
+                    </div>
+                );
+            }}
+            getOptionHeight={() => OPTION_HEIGHT}
             options={options}
             renderControl={({ triggerProps }) => {
                 return (
                     <button
                         {...triggerProps}
-                        className="py-2 px-3 rounded-[8px] bg-gray-100 flex gap-2 items-center hover:bg-gray-200 transition"
+                        className={classNames(
+                            "py-3 px-5 rounded-xl bg-gray-100 flex justify-between gap-6 items-start hover:bg-gray-100 ",
+                            className,
+                        )}
                     >
-                        <Text variant="subheader-3">{title}</Text>
+                        <div className="flex flex-col gap-1 items-start text-start">
+                            {label && (
+                                <Text
+                                    variant="subheader-1"
+                                    className="text-slate-500"
+                                >
+                                    {label}
+                                </Text>
+                            )}
+                            {}
+                            {title ? (
+                                <Text variant="body-3">{title}</Text>
+                            ) : (
+                                placeholder && (
+                                    <Text
+                                        variant="body-2"
+                                        className="text-gray-400"
+                                    >
+                                        {placeholder}
+                                    </Text>
+                                )
+                            )}
+                        </div>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            strokeWidth={2}
+                            strokeWidth={4}
                             stroke="currentColor"
-                            className="size-3"
+                            className="size-3 text-slate-500 shrink-0 my-auto"
                         >
                             <path
                                 strokeLinecap="round"
@@ -67,8 +123,8 @@ const Select = <V extends ISelectBase>(props: ISelectProps<V>) => {
                     </button>
                 );
             }}
-            popupClassName=" border border-gray-300 py-1 px-0 mt-1 "
-            className="text-l"
+            popupClassName="shadow-0  border-none outline-none mt-1"
+            className="text-l shadow-0"
             onUpdate={onUpdate}
             {...restprops}
             value={value}

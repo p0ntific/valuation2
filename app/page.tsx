@@ -1,11 +1,13 @@
 "use client";
 import { AboutPanel } from "@/modules/aboutPanel";
+import { FastForm } from "@/modules/fastForm";
 import { Footer } from "@/modules/footer";
 import { LangController } from "@/modules/langController";
 import { LinkToForm } from "@/modules/linkToForm";
 import { Navbar } from "@/modules/navbar";
 import { QA } from "@/modules/qa";
 import { RegionController } from "@/modules/regionController";
+import { WhereGetDataBlock } from "@/modules/whereGetDataBlock";
 
 export default function Home() {
     return (
@@ -21,6 +23,8 @@ export default function Home() {
             <AboutPanel title="Оценка квартиры" />
             <LinkToForm />
             <QA />
+            <WhereGetDataBlock />
+            <FastForm />
             <Footer />
         </div>
     );

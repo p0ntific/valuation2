@@ -1,5 +1,6 @@
-import { AnyAsyncFunction } from "@/types";
+import { Any, AnyAsyncFunction } from "@/types";
 import { useCallback, useState } from "react";
+import toast from "react-hot-toast";
 
 // Определим интерфейс для возвращаемого значение
 interface UseMutationResult<T> {
@@ -25,10 +26,10 @@ export const useMutation = <T>(
                 const result = await asyncFunction(...args);
                 setData(result); // Сохраняем данные результата запроса
                 setIsLoading(false);
-            } catch (err) {
+            } catch (err: Any) {
                 setIsError(true);
                 setIsLoading(false);
-                console.error(err); // Обрабатываем ошибку
+                toast.error(err?.message);
             }
         },
         [asyncFunction],

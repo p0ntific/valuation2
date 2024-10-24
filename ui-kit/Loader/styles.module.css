@@ -1,0 +1,6 @@
+.isDark div {
+    @apply bg-slate-700;
+}
+.isLight div {
+    @apply bg-white;
+}

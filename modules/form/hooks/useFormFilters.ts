@@ -3,7 +3,7 @@ import { useFilters } from "@/lib/filters/hooks/useFilters";
 import { IFiltersSubmitParams } from "@/lib/filters/types";
 import { useCallback } from "react";
 import { availableFields, defaultValues } from "../constants";
-import { IFilters } from "../types";
+import { IFilters } from "../../../shared/form/types";
 import { useGetInitialValues } from "./useGetInitialValues";
 
 interface IUseFormFiltersProps {

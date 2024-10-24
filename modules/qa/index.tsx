@@ -1,28 +1,16 @@
 "use client";
 import { useTranslation } from "@/lib/translation/useTranslation";
 import { Text } from "@/ui-kit/Text";
-import classNames from "classnames";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { translations } from "./i18n";
-
-const defaultActiveState = {
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-} as const;
-
-type IActiveState = { [key in keyof typeof defaultActiveState]: boolean };
+import Link from "next/link";
 
 export const QA = () => {
-    const [activeQuestion, setActiveQuestion] =
-        useState<IActiveState>(defaultActiveState);
-
     const t = useTranslation(translations);
 
     const items: { q: string; a: string }[] = useMemo(
         () =>
-            Object.keys(defaultActiveState).map((el) => {
+            [1, 2, 3, 4].map((el) => {
                 return {
                     q: t(`question_${el}` as keyof (typeof translations)["ru"]),
                     a: t(`answer_${el}` as keyof (typeof translations)["ru"]),
@@ -32,83 +20,37 @@ export const QA = () => {
     );
 
     return (
-        <div className="flex flex-col mb-16 ">
-            <Text
-                variant="display-2"
-                className="pb-16 mb-6 border-b border-gray-800 "
-            >
-                {t("title")}
-            </Text>
-            <div className="flex flex-col">
-                {items.map((el, index) => {
-                    const isActive =
-                        activeQuestion[index as keyof IActiveState];
-
+        <div className="flex flex-col gap-8 mb-32">
+            <Text variant="display-2">{t("title")}</Text>
+            <div className="grid grid-cols-4 gap-8">
+                {items.map((el) => {
                     return (
                         <div
-                            key={index + "qa"}
-                            className="flex gap-4 group w-full flex-col pt-4 pb-6 mb-4 cursor-pointer border-b border-gray-800"
+                            key={el.a}
+                            className="bg-gray-50 rounded-xl flex flex-col gap-4 p-6 h-[400px] w-full"
                         >
-                            <div
-                                className="flex justify-between "
-                                onClick={() =>
-                                    setActiveQuestion({
-                                        ...defaultActiveState,
-                                        [index]: !isActive,
-                                    })
-                                }
+                            <Text variant="header-2">{el.q}</Text>
+                            <Text variant="body-3">{el.a}</Text>
+                            <Link
+                                href="about"
+                                className="flex items-center gap-1 text-red-500 mt-auto ml-auto"
                             >
-                                <Text
-                                    variant="header-1"
-                                    className="text-gray-700 group-hover:text-blue-500"
+                                Подробнее{" "}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1}
+                                    stroke="currentColor"
+                                    className="size-6"
                                 >
-                                    {el.q}
-                                </Text>
-                                <span className="p-2 rounded-full hover:bg-gray-100 transition">
-                                    {isActive ? (
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M6 18 18 6M6 6l12 12"
-                                            />
-                                        </svg>
-                                    ) : (
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M12 4.5v15m7.5-7.5h-15"
-                                            />
-                                        </svg>
-                                    )}
-                                </span>
-                            </div>
-                            <p
-                                className={classNames(
-                                    "text-lg transform transition-all duration-500",
-                                    {
-                                        " max-h-[400px]": isActive,
-                                        "max-h-0 overflow-hidden": !isActive,
-                                    },
-                                )}
-                            >
-                                {el.a}
-                            </p>
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                                    />
+                                </svg>
+                            </Link>
                         </div>
                     );
                 })}

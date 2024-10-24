@@ -29,7 +29,7 @@ export const NewFlatField = () => {
                     ),
                 };
             }),
-        [],
+        [t],
     );
 
     if (!isActive) {

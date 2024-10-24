@@ -1,5 +1,5 @@
 import { IGetPriceDto } from "./api/getPrice";
-import { IFilters } from "./types";
+import { IFilters } from "../../shared/form/types";
 
 export const defaultValues: IFilters = {
     address: "",

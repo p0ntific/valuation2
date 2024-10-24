@@ -1,6 +1,6 @@
 const ru = {
     title_base: "Основные данные",
-    title_houseInfo: "Дополнительные параметры квартиры",
+    title_houseInfo: "Дополнительные параметры",
     title_email: "Подпишитесь на рассылку:)",
     title_renovation: "Ремонт",
     description_email:

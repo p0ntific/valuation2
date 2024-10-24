@@ -1,8 +1,8 @@
 import { useField } from "@/lib/filters/hooks/useField";
 import { Input } from "@/ui-kit/Input";
-import { IFilters } from "../../types";
+import { IBaseFieldProps, IFilters } from "../../types";
 
-export const AreaField = () => {
+export const AreaField = ({ className }: IBaseFieldProps) => {
     const { onChange, value, isError, isActive } = useField<IFilters, "area">(
         "area",
     );
@@ -14,7 +14,7 @@ export const AreaField = () => {
     return (
         <Input
             type="number"
-            className="w-1/2"
+            className={className}
             placeholder="35"
             label="Площадь, м²"
             value={value}

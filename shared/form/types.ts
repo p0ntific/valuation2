@@ -3,7 +3,7 @@
 
 import { IRoomsTotalField } from "./fields/base/RoomsTotalField";
 import { IHouseMaterialField } from "./fields/houseInfo/HouseMaterialField";
-import { INewFlatField } from "./fields/houseInfo/NewFlatField";
+import { INewFlatField } from "./fields/renovation/NewFlatField";
 import { IParkingTypeField } from "./fields/houseInfo/ParkingTypeField";
 import { IHasRenovationField } from "./fields/renovation/HasRenovationField";
 import { IRenovationTypeField } from "./fields/renovation/RenovationType";
@@ -22,3 +22,7 @@ export interface IFilters {
 }
 
 export type IFiltersKeys = keyof IFilters;
+
+export interface IBaseFieldProps {
+    className?: string;
+}

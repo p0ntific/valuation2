@@ -15,6 +15,7 @@ export interface IFormStepContext {
     countSteps: number;
     handlePrevStep: () => void;
     handleNextStep: (canGoNextStep?: boolean) => void;
+    onChange: (step: IFormStep) => void;
 }
 
 export const FormStepContext = createContext<IFormStepContext | null>(null);

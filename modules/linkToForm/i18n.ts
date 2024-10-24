@@ -1,6 +1,6 @@
 const ru = {
     title: "Нужно лишь заполнить небольшую форму",
-    button: "Приступим",
+    button: "Начать",
 } as const;
 
 export const translations = {

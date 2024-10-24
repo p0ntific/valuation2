@@ -1,10 +1,10 @@
 import { useField } from "@/lib/filters/hooks/useField";
 import { Input } from "@/ui-kit/Input";
-import { IFilters } from "../../types";
+import { IBaseFieldProps, IFilters } from "../../types";
 
-export const FloorsField = () => {
-    const { onChange, value, isError, isActive } = useField<IFilters, "floors">(
-        "floors",
+export const FloorField = ({ className }: IBaseFieldProps) => {
+    const { onChange, value, isError, isActive } = useField<IFilters, "floor">(
+        "floor",
     );
 
     if (!isActive) {
@@ -13,8 +13,9 @@ export const FloorsField = () => {
 
     return (
         <Input
-            label="Этажность здания"
-            className="min-w-[300px] max-w-[300px]"
+            label="Этаж"
+            className={className}
+            placeholder="10"
             value={value}
             type="number"
             onChange={onChange}

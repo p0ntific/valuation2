@@ -9,6 +9,8 @@ const ru = {
     noRenovationType_label_1: "Без отделки",
     noRenovationType_label_2: "Предчистовая отделка",
     noRenovationType_label_3: "Чистовая отделка",
+    newFlat_label_1: "Новостройка",
+    newFlat_label_2: "Вторичка",
 } as const;
 
 export const translations = {
