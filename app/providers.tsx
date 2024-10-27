@@ -7,6 +7,7 @@ import { useLangController } from "@/lib/translation/useLangController";
 import { useFormFilters } from "@/modules/form/hooks/useFormFilters";
 import { ThemeProvider } from "@gravity-ui/uikit";
 import { Toaster } from "react-hot-toast";
+import { YMapComponentsProvider } from "ymap3-components";
 
 export default function Providers({
     children,
@@ -22,8 +23,12 @@ export default function Providers({
             <RegionContext.Provider value={regionData}>
                 <FiltersProvider contextValue={contextValue}>
                     <ThemeProvider theme="light">
-                        {children}
-                        <Toaster />
+                        <YMapComponentsProvider
+                            apiKey={process.env.NEXT_PUBLIC_YANDEX_MAP_API_KEY}
+                        >
+                            {children}
+                            <Toaster />
+                        </YMapComponentsProvider>
                     </ThemeProvider>
                 </FiltersProvider>
             </RegionContext.Provider>

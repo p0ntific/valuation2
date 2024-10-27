@@ -1,5 +1,5 @@
 .input input {
-    @apply text-[16px] m-0 p-0 !important;
+    @apply text-[16px] m-0 p-0 text-ellipsis overflow-hidden !important;
     -webkit-appearance: none !important;
 }
 

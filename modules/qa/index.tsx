@@ -22,15 +22,17 @@ export const QA = () => {
     return (
         <div className="flex flex-col gap-8 mb-32">
             <Text variant="display-2">{t("title")}</Text>
-            <div className="grid grid-cols-4 gap-8">
+            <div className="grid grid-cols-4 gap-4">
                 {items.map((el) => {
                     return (
                         <div
                             key={el.a}
-                            className="bg-gray-50 rounded-xl flex flex-col gap-4 p-6 h-[400px] w-full"
+                            className="h-full bg-gray-50 rounded-xl flex flex-col gap-4 p-6  w-full"
                         >
                             <Text variant="header-2">{el.q}</Text>
-                            <Text variant="body-3">{el.a}</Text>
+                            <Text variant="body-3" className="pb-6">
+                                {el.a}
+                            </Text>
                             <Link
                                 href="about"
                                 className="flex items-center gap-1 text-red-500 mt-auto ml-auto"

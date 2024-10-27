@@ -1,33 +1,19 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { AVAILABLE_FORM_STEPS, IFormStep, IFormStepContext } from "./context";
-import { useControlLocalStorage } from "@/hooks/useControlLocalStorage";
-
-const LOCAL_STORAGE_NAME = "step";
 
 export const useFormStepController = () => {
-    const { localStorageValue, setLocalStorageValue } =
-        useControlLocalStorage<IFormStep>(LOCAL_STORAGE_NAME);
-
     const [formStep, setFormStep] = useState<IFormStep>("BASE");
 
-    useEffect(() => {
-        setFormStep(localStorageValue ?? "BASE");
-    }, [localStorageValue]);
+    const onChange = useCallback((step: IFormStep) => {
+        setFormStep(step);
+    }, []);
 
-    const onChange = useCallback(
-        (step: IFormStep) => {
-            setLocalStorageValue(step);
-            setFormStep(step);
-        },
-        [setLocalStorageValue],
-    );
     const handleNextStep = useCallback(
         (canGoOnNextStep?: boolean) => {
             if (canGoOnNextStep === false) {
                 return;
             }
-            console.log(formStep);
             if (formStep === "BASE") {
                 onChange("HOUSE_INFO");
             } else if (formStep === "HOUSE_INFO") {

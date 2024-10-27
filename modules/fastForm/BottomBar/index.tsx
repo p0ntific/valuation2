@@ -8,9 +8,11 @@ import { Button } from "@/ui-kit/Button";
 
 interface IBottomBarProps {
     className?: string;
+    handleSubmit?: () => void;
+    isLoading?: boolean;
 }
 
-const BottomBar = ({ className }: IBottomBarProps) => {
+const BottomBar = ({ className, isLoading, handleSubmit }: IBottomBarProps) => {
     return (
         <div
             className={classNames(
@@ -23,7 +25,8 @@ const BottomBar = ({ className }: IBottomBarProps) => {
             <FloorField className="w-32 shrink-0" />
             <RoomsTotalField />
             <Button
-                onClick={() => {}}
+                isLoading={isLoading}
+                onClick={handleSubmit}
                 isSquare
                 view="action"
                 className="h-[72px] w-64 ml-2 shrink-0"

@@ -14,10 +14,11 @@ const WhereGetDataBlock = () => {
             <Text variant="display-2">{t("title")}</Text>
             <div className="flex gap-8">
                 <div className="flex flex-col gap-6 text-white bg-black rounded-xl py-8 px-12 w-2/3">
-                    <Text variant="display-4"> {t("title_block_1")}</Text>
-                    <Text variant="body-3"> {t("description_1")}</Text>
-                    <div className="mt-16 flex gap-8">
-                        {[1, 2, 3].map((el) => {
+                    <Text variant="display-2"> {t("title_block_1")}</Text>
+                    <Text variant="body-3">{t("description_1")}</Text>
+
+                    <div className="mt-16 flex gap-8 flex-wrap">
+                        {[1, 2, 3, 4].map((el) => {
                             const i18nkey = ("link_name_" +
                                 el) as keyof (typeof translations)["ru"];
                             return (

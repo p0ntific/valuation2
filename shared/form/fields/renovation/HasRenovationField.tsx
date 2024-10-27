@@ -6,7 +6,7 @@ import { useMemo } from "react";
 import { IFilters } from "../../types";
 import { translations } from "./i18n";
 
-const HAS_RENOVATION_AVAILABLE_VALUES = ["0", "1", "2"];
+const HAS_RENOVATION_AVAILABLE_VALUES = ["0", "1", "2"] as const;
 
 export type IHasRenovationField =
     | (typeof HAS_RENOVATION_AVAILABLE_VALUES)[number]

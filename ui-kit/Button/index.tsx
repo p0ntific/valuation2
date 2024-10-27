@@ -6,7 +6,7 @@ import { Loader } from "../Loader";
 interface IButtonProps extends ButtonProps {
     isLoading?: boolean;
     isSquare?: boolean;
-    onClick: () => void;
+    onClick?: () => void;
     shouldConfirm?: boolean;
     isDark?: boolean;
 }

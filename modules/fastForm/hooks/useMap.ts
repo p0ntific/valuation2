@@ -1,20 +1,14 @@
+import { useMap } from "@/hooks/useMap";
+import { useField } from "@/lib/filters/hooks/useField";
 import { useRegionContext } from "@/lib/region/context";
+import { IFilters } from "@/shared/form/types";
 import { MOSCOW_COORDINATES, SPB_COORDINATES } from "@/shared/map/consts";
-import {
-    DomEventHandler,
-    LngLat,
-    YMapLocationRequest,
-} from "@yandex/ymaps3-types";
-import { useCallback, useEffect, useMemo, useState } from "react";
 
-const DEFAULT_ZOOM = 13;
+import { useEffect, useMemo } from "react";
 
-export const useMap = () => {
+export const useFastForm = () => {
     const { region } = useRegionContext();
-    const [markerCoordinates, setMarkerCoordinates] = useState<LngLat | null>(
-        null,
-    );
-
+    const { onChange } = useField<IFilters, "address">("address");
     const defaultCenter = useMemo(() => {
         switch (region) {
             case "Москва":
@@ -24,36 +18,18 @@ export const useMap = () => {
         }
     }, [region]);
 
-    const defaultLocation: YMapLocationRequest = {
-        zoom: DEFAULT_ZOOM,
-        duration: 200,
-        easing: "ease-in-out",
+    const { location, markerCoordinates, onUpdate, handleClick } = useMap({
         center: defaultCenter,
-    };
-
-    const [location, setLocation] = useState(defaultLocation);
-
-    const handleClick: DomEventHandler = useCallback((_, event) => {
-        setMarkerCoordinates(event.coordinates);
-    }, []);
-
-    const onUpdate = useCallback(({ location, mapInAction }: any) => {
-        if (!mapInAction) {
-            setLocation({
-                center: location.center,
-                zoom: location.zoom,
-            });
-        }
-    }, []);
+        isMultipleMarkers: false,
+        shouldRestartMap: Boolean(region),
+    });
 
     useEffect(() => {
-        setLocation(defaultLocation);
-        setMarkerCoordinates(null);
-    }, [region]);
-
-    const geocodedAddress = useMemo(() => {
-        return "Лабораторный проспект дом 20 корпус 3";
-    }, [markerCoordinates]);
+        //fetch address
+        if (markerCoordinates) {
+            onChange("Лабораторный проспект дом 20 корпус 3");
+        }
+    }, [markerCoordinates, onChange]);
 
     return { location, onUpdate, handleClick, markerCoordinates };
 };

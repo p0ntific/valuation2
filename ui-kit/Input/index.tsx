@@ -1,6 +1,6 @@
 import { TextInput, TextInputProps } from "@gravity-ui/uikit";
 import classNames from "classnames";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { Text } from "../Text";
 import styles from "./styles.module.css";
 
@@ -37,7 +37,7 @@ export const Input = (props: IInput) => {
 
     return (
         <div className={classNames(className, "flex flex-col gap-2")}>
-            <div className="flex w-full  flex-col bg-gray-100 relative  rounded-xl py-3 justify-center px-5">
+            <div className="flex w-full  flex-col bg-gray-100 relative  rounded-xl py-3 justify-center pl-5 pr-12">
                 {label && (
                     <label className="mb-1">
                         <Text variant="subheader-1" className="text-gray-500 ">

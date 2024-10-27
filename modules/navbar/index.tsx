@@ -14,7 +14,7 @@ export const Navbar = ({ rightAdorment }: INavbar) => {
     const t = useTranslation(translations);
 
     return (
-        <div className="w-full flex items-center justify-between py-4 gap-2">
+        <div className="w-full flex items-center justify-between py-4 gap-2 sticky top-0 left-0 z-10 bg-white">
             <Link
                 href="/"
                 className="flex gap-2 items-center hover:bg-gray-100 transition py-2 px-4 rounded-xl"

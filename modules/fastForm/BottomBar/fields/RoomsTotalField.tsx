@@ -1,7 +1,6 @@
 import { useField } from "@/lib/filters/hooks/useField";
 import { IFilters } from "@/shared/form/types";
 
-import { RadioGroup } from "@/ui-kit/RadioGroup";
 import { Select } from "@/ui-kit/Select";
 
 const ROOMS_TOTAL_AVAILABLE_VALUES = ["0.7", "1", "2", "3", "4", "5+"] as const;
