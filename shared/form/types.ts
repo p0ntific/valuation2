@@ -31,7 +31,7 @@ export interface IBaseFieldProps {
 export interface IGetPriceDto {
     address: string;
     area: number;
-    cnt_rooms: number;
+    cnt_rooms: "0.7" | "1.0" | "2.0" | "3.0" | "4.0" | "5.0";
     floor: number;
     floors: number;
     has_lift: 0 | 1;

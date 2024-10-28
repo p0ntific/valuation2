@@ -61,7 +61,7 @@ export const Button = (props: IButtonProps) => {
             {...restProps}
             onClick={handleClick}
             className={classNames(
-                "px-8 py-3 transition font-semibold text-[18px]",
+                "px-8 py-4 transition font-semibold text-[18px]",
                 {
                     "rounded-full": !isSquare,
                     "rounded-xl": isSquare,
