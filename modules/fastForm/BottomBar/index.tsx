@@ -9,10 +9,16 @@ import { Button } from "@/ui-kit/Button";
 interface IBottomBarProps {
     className?: string;
     handleSubmit?: () => void;
+    canSubmit?: boolean;
     isLoading?: boolean;
 }
 
-const BottomBar = ({ className, isLoading, handleSubmit }: IBottomBarProps) => {
+const BottomBar = ({
+    className,
+    isLoading,
+    handleSubmit,
+    canSubmit,
+}: IBottomBarProps) => {
     return (
         <div
             className={classNames(
@@ -26,7 +32,7 @@ const BottomBar = ({ className, isLoading, handleSubmit }: IBottomBarProps) => {
             <RoomsTotalField />
             <Button
                 isLoading={isLoading}
-                onClick={handleSubmit}
+                onClick={canSubmit ? handleSubmit : undefined}
                 isSquare
                 view="action"
                 className="h-[72px] w-64 ml-2 shrink-0"

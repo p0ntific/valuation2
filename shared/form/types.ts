@@ -31,7 +31,7 @@ export interface IBaseFieldProps {
 export interface IGetPriceDto {
     address: string;
     area: number;
-    cnt_rooms: "0.7" | "1.0" | "2.0" | "3.0" | "4.0" | "5.0";
+    cnt_rooms: number;
     floor: number;
     floors: number;
     has_lift: 0 | 1;
@@ -56,7 +56,11 @@ export interface IHouseInfo {
     longitude: number;
 }
 
-export interface ISimilarObject extends IGetPriceDto, IHouseInfo {}
+export interface ISimilarObject
+    extends Omit<IGetPriceDto, "cnt_rooms">,
+        IHouseInfo {
+    cnt_rooms: "0.7" | "1.0" | "2.0" | "3.0" | "4.0" | "5.0";
+}
 
 export interface IGetPriceResponse {
     price: number;

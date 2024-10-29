@@ -11,11 +11,11 @@ const Email = () => {
         <div className="fixed right-4 bottom-20 flex gap-4 items-end ">
             <div
                 className={classNames(
-                    "bg-white flex flex-col z-10 transition-all gap-4 rounded-xl p-4 py-4 px-4 w-[400px] shadow-md",
+                    "bg-white flex flex-col z-10 absolute bottom-0 transition-all gap-4 rounded-xl p-4 py-4 px-4 w-[400px] shadow-md",
                     {
-                        "translate-x-10 opacity-0 pointer-events-none":
+                        "right-full opacity-0 pointer-events-none -z-10":
                             !expanded,
-                        "translate-x-0 opacity-100": expanded,
+                        "right-14 opacity-100": expanded,
                     },
                 )}
             >

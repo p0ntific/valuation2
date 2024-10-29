@@ -23,8 +23,8 @@ export default function Home() {
             <AboutPanel title="Оценка квартиры" />
             <LinkToForm />
             <QA />
-            <WhereGetDataBlock />
             <FastForm />
+            <WhereGetDataBlock />
             <Footer />
         </div>
     );

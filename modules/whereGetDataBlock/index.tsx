@@ -13,7 +13,7 @@ const WhereGetDataBlock = () => {
         <div className="flex flex-col gap-8 mb-32">
             <Text variant="display-2">{t("title")}</Text>
             <div className="flex gap-8">
-                <div className="flex flex-col gap-6 text-white bg-black rounded-xl py-8 px-12 w-2/3">
+                <div className="flex flex-col gap-6 text-black bg-blue-200 rounded-xl py-8 px-12 w-2/3">
                     <Text variant="display-2"> {t("title_block_1")}</Text>
                     <Text variant="body-3">{t("description_1")}</Text>
 
@@ -25,7 +25,7 @@ const WhereGetDataBlock = () => {
                                 <Link href="#" key={el}>
                                     <Text
                                         variant="body-3"
-                                        className="text-white hover:text-red-500"
+                                        className="text-black hover:text-red-500"
                                     >
                                         {t(i18nkey)}
                                     </Text>
@@ -40,7 +40,7 @@ const WhereGetDataBlock = () => {
                         {t("button")}
                     </Link>
                 </div>
-                <div className="flex flex-col gap-6 text-white bg-purple-800 rounded-xl py-8 px-10 w-1/3">
+                <div className="flex flex-col gap-6 text-black bg-purple-200 rounded-xl py-8 px-10 w-1/3">
                     <Text variant="display-2"> {t("title_block_2")}</Text>
                     <Text variant="body-3"> {t("description_2")}</Text>
                     <Link

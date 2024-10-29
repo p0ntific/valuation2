@@ -13,12 +13,18 @@ import { IFilters } from "../types";
  */
 export const useSubmit = () => {
     const { navigate } = useUrl();
-    const { values, setResponse } = useFiltersContext<IFilters>();
+    const { values, setResponse, fieldsMeta } = useFiltersContext<IFilters>();
     const { region } = useRegionContext();
 
     const { mutate, isLoading, data } = useMutation<{
         data: IGetPriceResponse;
     }>(getPrice);
+
+    const canSubmit =
+        fieldsMeta.address.isTouched &&
+        fieldsMeta.area.isTouched &&
+        fieldsMeta.floor.isTouched &&
+        fieldsMeta.roomsTotal.isTouched;
 
     useEffect(() => {
         if (data && !isLoading) {
@@ -67,6 +73,7 @@ export const useSubmit = () => {
 
     return {
         handleSubmit,
+        canSubmit,
         isLoading,
     };
 };
